@@ -6,7 +6,7 @@
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:50:12 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/11 23:27:58 by mamounib         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:49:20 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ char	*ft_getpaths(char **env)
 	while (*paths)
 	{
 		if (!ft_memcmp(*paths, "PATH=",4))
-		{
 			return *paths;
-		}
 		paths++;
 	}
-	return NULL;
+	return (NULL);
 }
