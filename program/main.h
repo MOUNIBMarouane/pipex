@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: killwa <killwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:28:25 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/11 23:03:00 by mamounib         ###   ########.fr       */
+/*   Updated: 2023/03/16 00:15:49 by killwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+char	*ft_getpaths(char **env);
+char	*ft_executing(char *cmd, char **env);
+int	ft_checkargs(char *arg, char **env);
 #endif 

@@ -1,12 +1,6 @@
 # Object files
 *.o
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
 # Executables
 *.out
 
