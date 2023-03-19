@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   ft_checkfd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 14:28:25 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/19 11:09:22 by mamounib         ###   ########.fr       */
+/*   Created: 2023/03/19 08:33:28 by mamounib          #+#    #+#             */
+/*   Updated: 2023/03/19 10:32:59 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
-# include "../cloned/libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-char	*ft_getpaths(char **env);
-char	*ft_executing(char *cmd, char **env);
-int		ft_checkargs(char *arg, char **env);
-int		ft_checkfd(char *infile);
-#endif 
+#include "../program/main.h"
+
+int	ft_checkfd(char *infile)
+{
+	int	infd;
+
+	infd = open(infile, O_RDWR);
+	if (infd < 0)
+		perror("error opening file");
+	return (infd);
+}

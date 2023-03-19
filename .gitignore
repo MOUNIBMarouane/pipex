@@ -20,3 +20,6 @@ Mkfile.old
 dkms.conf
 
 .dist/
+
+/testpipe
+file.txt
