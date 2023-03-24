@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getpaths.c                                      :+:      :+:    :+:   */
+/*   ft_closefd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 22:50:12 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/14 12:35:08 by mamounib         ###   ########.fr       */
+/*   Created: 2023/03/23 08:43:51 by mamounib          #+#    #+#             */
+/*   Updated: 2023/03/24 09:17:41 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../program/main.h"
 
-char	*ft_getpaths(char **env)
+void	ft_closefd(int fd, ...)
 {
-	char	**paths;
+	va_list	args;
+	int		i;
 
-	paths = env;
-	while (*paths)
+	i = fd;
+	va_start(args, fd);
+	while (i)
 	{
-		if (!ft_memcmp(*paths, "PATH=",5))
-			return (*paths);
-		paths++;
+		close(i);
+		i = va_arg(args, int);
 	}
-	return (NULL);
+	va_end(args);
 }

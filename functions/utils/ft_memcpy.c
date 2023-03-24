@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checkfd.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/19 08:33:28 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/19 10:32:59 by mamounib         ###   ########.fr       */
+/*   Created: 2022/10/08 18:58:56 by mamounib          #+#    #+#             */
+/*   Updated: 2023/03/23 10:07:07 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../program/main.h"
+#include "../../program/main.h"
 
-int	ft_checkfd(char *infile)
+void	*ft_memcpy(void *dist, const void *src, size_t n)
 {
-	int	infd;
+	size_t	i;
 
-	infd = open(infile, O_RDWR);
-	if (infd < 0)
-		perror("error opening file");
-	return (infd);
+	if (dist == src)
+		return (dist);
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dist)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dist);
 }

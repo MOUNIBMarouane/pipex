@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checkargs.c                                     :+:      :+:    :+:   */
+/*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 23:11:35 by killwa            #+#    #+#             */
-/*   Updated: 2023/03/19 11:43:54 by mamounib         ###   ########.fr       */
+/*   Created: 2023/03/11 22:50:12 by mamounib          #+#    #+#             */
+/*   Updated: 2023/03/24 09:15:11 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../program/main.h"
 
-int	ft_cmdargs(char *arg, char **env)
+char	*ft_getenv(char **env)
 {
-	char	**fullcmd;
+	char	**paths;
 
-	if (ft_memchr(arg, ' ', ft_strlen(arg)))
+	paths = env;
+	if (paths == NULL)
+		return (NULL);
+	while (*paths)
 	{
-		fullcmd = ft_split(arg, ' ');
-		if (ft_executing(*fullcmd, env) != NULL)
-			return (1);
+		if (!ft_memcmp(*paths, "PATH=", 5))
+			return (*paths);
+		paths++;
 	}
-	else
-	{
-		if (ft_executing(arg, env) != NULL)
-			return (2);
-	}
-	return (0);
+	return (NULL);
 }

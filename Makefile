@@ -1,34 +1,30 @@
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LIBFT = libft.a
+NAME = pipex
+
 RM = rm -f
-FUNCTIONS = ft_executing.c \
-			ft_getpaths.c \
+CFLAGS = -Wall -Wextra -Werror
+CC = cc
 
-OBJECT = $(FILES:.c=.o)
+FUNCTIONS = functions/ft_getenv\
+			functions/ft_getpath\
+			functions/ft_openfd\
+			functions/ft_closefd\
+			functions/ft_perror\
+			functions/utils/ft_memcmp\
+			functions/utils/ft_memcpy\
+			functions/utils/ft_split\
+			functions/utils/ft_strlen\
+			functions/utils/ft_substr\
+			functions/utils/ft_strchr\
+			functions/utils/ft_strjoin\
+			program/main\
 
-LIBFT_PATH = libft/
-objects_PATH = buid/
+OBJECT = $(FUNCTIONS:=.o)
 
-all : $(LIBFT) $(objects_PATH) $(NAME)
+$(NAME) : $(OBJECT)
+	$(CC) $(CFLAGS) $(OBJECT) -o $@ 
 
-$(LIBFT):
-	@make -s -C $(LIBFT_PATH)
-
-$(objects_PATH):
-	@mkdir $(objects_PATH)
-
-
-%.o : %.c main.h
+%.o : %.c program/main.h
 	$(CC) $(CFLAGS) -c -o $@  $<
-
-$(NAME) : $(FUNCTIONS)
-	$(CC) $(CFLAGS) 
-
-
-
-# bonus : $(OBJECT_B)
-# 	$(AR) $(NAME) $(OBJECT_B)
 
 clean :
 	$(RM) $(OBJECT)
@@ -38,6 +34,6 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : fclean clean re all bonus
+.PHONY : fclean clean re all
 
 
