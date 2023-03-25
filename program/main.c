@@ -6,7 +6,7 @@
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:05:02 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/25 10:14:49 by mamounib         ###   ########.fr       */
+/*   Updated: 2023/03/25 10:22:15 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,23 @@ void	ft_execmd2(char *arg, int fd, int pipfd, char **env)
 
 int	main(int argc, char **argv, char **environ)
 {
-	char			*file_name[2];
 	int				fd[2];
 	int				pipfd[2];
 	pid_t			pid[2];
 
 	if (argc != 5)
 		exit(1);
-	file_name[0] = argv[1];
-	file_name[1] = argv[4];
-	fd[0] = ft_openfd(file_name[0], 1);
-	fd[1] = ft_openfd(file_name[1], 2);
-	if (pipe(pipfd) == -1)
-		exit(1);
+	fd[0] = ft_openfd(argv[1], 1);
+	fd[1] = ft_openfd(argv[4], 2);
 	pid[0] = fork();
+	if (pid[0] == -1)
+		exit (1);
 	if (pid[0] == 0)
 		ft_execmd1(argv[2], fd[0], pipfd[1], environ);
 	close(pipfd[1]);
 	pid[1] = fork();
+	if (pid[1] == -1)
+		exit(1);
 	if (pid[1] == 0)
 		ft_execmd2(argv[3], fd[1], pipfd[0], environ);
 	ft_closefd(pipfd[0], fd[0], fd[1]);
