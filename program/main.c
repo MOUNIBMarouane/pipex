@@ -6,7 +6,7 @@
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:05:02 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/25 11:33:45 by mamounib         ###   ########.fr       */
+/*   Updated: 2023/03/25 23:52:39 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_execmd1(char *arg, int fd, int pipfd, char **env)
 		exit(1);
 	dup2(fd, 0);
 	dup2(pipfd, 1);
-	ft_closefd(pipfd, fd);
+	ft_closefd(pipfd, fd, -1, -1);
 	execve(cmd.path, cmd.fulcmd, NULL);
 	exit(1);
 }
@@ -37,7 +37,7 @@ void	ft_execmd2(char *arg, int fd, int pipfd, char **env)
 		exit(1);
 	dup2(fd, 1);
 	dup2(pipfd, 0);
-	ft_closefd(fd, pipfd);
+	ft_closefd(fd, pipfd, -1, -1);
 	execve(cmd.path, cmd.fulcmd, NULL);
 	exit(1);
 }
@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **environ)
 		exit(1);
 	if (pid[1] == 0)
 		ft_execmd2(argv[3], fd[1], pipfd[0], environ);
-	ft_closefd(pipfd[0], fd[0], fd[1]);
+	ft_closefd(pipfd[0], fd[0], fd[1], -1);
 	waitpid(pid[0], NULL, 0);
 	waitpid(pid[1], NULL, 0);
 	return (0);

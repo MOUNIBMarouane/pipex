@@ -20,11 +20,14 @@ FUNCTIONS = functions/ft_getenv\
 
 OBJECT = $(FUNCTIONS:=.o)
 
+all :  $(NAME)
+
 $(NAME) : $(OBJECT)
 	$(CC) $(CFLAGS) $(OBJECT) -o $@ 
 
 %.o : %.c program/main.h
 	$(CC) $(CFLAGS) -c -o $@  $<
+	
 
 clean :
 	$(RM) $(OBJECT)
@@ -34,4 +37,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : fclean clean re
+.PHONY : fclean clean re all

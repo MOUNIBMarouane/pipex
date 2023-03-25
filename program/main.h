@@ -6,7 +6,7 @@
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:28:25 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/25 08:40:57 by mamounib         ###   ########.fr       */
+/*   Updated: 2023/03/25 22:30:09 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	*ft_getenv(char **env);
 char	*ft_getpath(char *cmd, char **env);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_perror(char *message);
-void	ft_closefd(int fd, ...);
+void	ft_closefd(int fd1, int fd2, int fd3, int fd4);
+// void	ft_closefd(int fd, ...);
 int		ft_checkenv(char *arg, char **env);
 int		ft_openfd(char *files, int options);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
