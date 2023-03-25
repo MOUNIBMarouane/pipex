@@ -6,7 +6,7 @@
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:05:02 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/25 10:22:15 by mamounib         ###   ########.fr       */
+/*   Updated: 2023/03/25 11:33:45 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ void	ft_execmd1(char *arg, int fd, int pipfd, char **env)
 	cmd.path = ft_getpath(cmd.fulcmd[0], env);
 	if (fd == -1 || !cmd.path)
 		exit(1);
-	close(pipfd);
 	dup2(fd, 0);
 	dup2(pipfd, 1);
-	close(pipfd);
-	close(fd);
 	ft_closefd(pipfd, fd);
 	execve(cmd.path, cmd.fulcmd, NULL);
 	exit(1);
@@ -55,6 +52,8 @@ int	main(int argc, char **argv, char **environ)
 		exit(1);
 	fd[0] = ft_openfd(argv[1], 1);
 	fd[1] = ft_openfd(argv[4], 2);
+	if (pipe(pipfd) == -1)
+		exit(1);
 	pid[0] = fork();
 	if (pid[0] == -1)
 		exit (1);
