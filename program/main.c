@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
+/*   By: killwa <killwa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 14:05:02 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/24 08:23:12 by mamounib         ###   ########.fr       */
+/*   Updated: 2023/03/24 22:33:02 by killwa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int main(int argc, char **argv, char **environ)
 	char	*file_name[2];
 	int		fd[2];
 	int		pfd[2];
-	pid_t		pid;
-	pid_t		pid1;
+	pid_t		pid[2];
     
 	if(argc != 5)
 		exit(1);
@@ -30,8 +29,8 @@ int main(int argc, char **argv, char **environ)
 	fd[1] = ft_openfd(file_name[1], 2);
 	if(pipe(pfd) == -1)
 		exit(1);
-	pid = fork(); //
-	if(pid == 0)
+	pid[0] = fork(); //
+	if(pid[0] == 0)
 	{
 		cmd[0].fulcmd = ft_split(argv[2], ' ');
 		cmd[0].path = ft_getpath(cmd[0].fulcmd[0], environ);
@@ -46,8 +45,8 @@ int main(int argc, char **argv, char **environ)
 		exit(1);
 	}
 	close(pfd[1]);
-	pid1 = fork();
-	if (pid1 == 0)
+	pid[1] = fork();
+	if (pid[1] == 0)
 	{
 		cmd[1].fulcmd = ft_split(argv[3], ' ');
 		cmd[1].path = ft_getpath(cmd[1].fulcmd[0], environ);
@@ -63,7 +62,7 @@ int main(int argc, char **argv, char **environ)
 	close(pfd[0]);
 	close(fd[0]);
 	close(fd[1]);
-	waitpid( pid, NULL, 0);
-	waitpid( pid1, NULL, 0);
+	waitpid( pid[0], NULL, 0);
+	waitpid( pid[1], NULL, 0);
 	return (0);
 }
