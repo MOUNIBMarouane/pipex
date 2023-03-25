@@ -6,7 +6,7 @@
 /*   By: mamounib <mamounib@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:33:28 by mamounib          #+#    #+#             */
-/*   Updated: 2023/03/24 09:18:09 by mamounib         ###   ########.fr       */
+/*   Updated: 2023/03/25 10:44:34 by mamounib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	ft_openfd(char *files, int options)
 	else if (options == 2)
 		fd = open(files, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
-		perror("");
+		perror("error opening file");
 	return (fd);
 }
